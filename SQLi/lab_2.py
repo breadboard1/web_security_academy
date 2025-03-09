@@ -8,5 +8,10 @@ import urllib3
 
 if __name__ == '__main__':
     try:
-        
-    except:
+        url = sys.argv[1].strip()
+        sqli_payload = sys.argv[2].strip()
+    except IndexError:
+        print("[-] Usage: %s <url> <sql-payload>" % sys.argv[0])
+        print('[-] Example: %s www.example.com "1=1"' % sys.argv[0])
+        sys.exit()
+

@@ -20,8 +20,8 @@ if __name__ == "__main__":
         url = sys.argv[1].strip()
         payload = sys.argv[2].strip()
     except IndexError:
-        print('[-] Example: %s www.example.com "1=1"' % sys.argv[0])
         print("[-] Usage: %s <url> <payload>" % sys.argv[0])
+        print('[-] Example: %s www.example.com "1=1"' % sys.argv[0])
         sys.exit()
 
     if exploit_sqli(url, payload):
